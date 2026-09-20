@@ -5,12 +5,12 @@ transfer_history ={}
 
 def menu():
     print("=" * 40)
-    print("        1. OPEN ACCOUTN")
+    print("        1. OPEN ACCOUNT")
     print("        2. DEPOSIT AMOUNT")
-    print("        3. WITHDRSWSL AMOUNT")
+    print("        3. WITHDRAW AMOUNT")
     print("        4. TRANSFER AMOUNT")
     print("        5. CHECK AMOUNT")
-    print("        6. CHECK ACCOUNT DETALE")
+    print("        6. CHECK ACCOUNT DETAILS")
     print("        7. STATEMENT")
     print("        8. TRANSFER AMOUNT HISTORY")
     print("        9. CHANGE PASSWORD")
@@ -18,12 +18,12 @@ def menu():
     print("        11. EXIT")
 
 def save_Account_information():
-    with open("Accoutn_Information.json", "w") as file:
+    with open("Account_Information.json", "w") as file:
         json.dump(All_Bank_Data,file,indent=4)
 
 def load_Bank_Information():
     try:
-        with open("Accoutn_Information.json", "r") as file:
+        with open("Account_Information.json", "r") as file:
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         return {}
@@ -97,7 +97,7 @@ def Add_Account():
     }
     
     save_Account_information()
-    print("ACCOUTN OPEN SUCCESSFULLY")
+    print("ACCOUNT OPEN SUCCESSFULLY")
 
 def deposit_amount():
     date = datetime.datetime.now().strftime("%d-%m-%y  %H:%M")
@@ -107,7 +107,7 @@ def deposit_amount():
         return
 
     if account_no not in All_Bank_Data:
-        print("ERROR: Invalide account number. Please enter a valid account number.")
+        print("ERROR: Invalid account number. Please enter a valid account number.")
         return
     
     amount = input("Enter your amount            :- ₹")
@@ -152,7 +152,7 @@ def withdrawal_amount():
         print("ERROR: Account number cannot be empty.")
         return
     if account_no not in All_Bank_Data:
-        print("ERROR: Invalid account number. Please enter a valide account number.")
+        print("ERROR: Invalid account number. Please enter a valid account number.")
         return
     amount = input("Enter your amount   :- ₹")
     if not amount.strip():
@@ -193,11 +193,11 @@ def withdrawal_amount():
     print("AMOUNT SUCCESSFULLY WITHDRAWN")
 
 def check_amount():
-    accoutn_no = input("Enter your current account no:- ")
-    if not accoutn_no.strip():
-        print("ERROR: Accoutn no cannot be empty.")
+    account_no = input("Enter your current account no:- ")
+    if not account_no.strip():
+        print("ERROR: Account no cannot be empty.")
         return
-    if accoutn_no not in All_Bank_Data:
+    if account_no not in All_Bank_Data:
         print("ERROR: Invalid accoutn number. Please enter a valid account number.")
         return
 
@@ -205,12 +205,12 @@ def check_amount():
     if not password.strip():
         print("ERROR: Password cannot be empty.")
         return
-    if All_Bank_Data[accoutn_no]['password'] != password:
+    if All_Bank_Data[account_no]['password'] != password:
         print("ERROR: Invalid password. Please enter a valid password")
         return
 
-    print(f"Name                         :- {All_Bank_Data[accoutn_no]['name']}")
-    print(f"Amount                       :- ₹{All_Bank_Data[accoutn_no]['amount']}")
+    print(f"Name                         :- {All_Bank_Data[account_no]['name']}")
+    print(f"Amount                       :- ₹{All_Bank_Data[account_no]['amount']}")
 
 def amount_transfer():
     date = datetime.datetime.now().strftime("%d-%m-%y  %H:%M")
